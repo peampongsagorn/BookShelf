@@ -1,11 +1,14 @@
 <h2>My Books</h2>
 <ul class="books">
-    <li *ngFor="let book of books"  [class.selected]="book === selectedBook" (click)="onSelect(book)">
+    <li *ngFor="let book of books" 
+     [class.selected]="book === selectedBook" 
+     (click)="onSelect(book)">
         <span class="badge">{{book.id}}</span> {{book.name}} <!--{{book.price}} {{book.author}} {{book.page}}-->
     </li>
 </ul>
+<app-book-detail [book]="selectedBook"></app-book-detail>
 
-<div *ngIf="selectedBook">
+<!--<div *ngIf="selectedBook">
 
     <h2>{{selectedBook.name | uppercase}} Details</h2>
     <div><span>id: </span>{{selectedBook.id}}</div>
@@ -29,7 +32,7 @@
         <input id="book-page" [(ngModel)]="selectedBook.page" placeholder="page">
     </div>
 
-</div>
+</div>-->
 
 
 
