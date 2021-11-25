@@ -1,0 +1,65 @@
+<h2>My Books</h2>
+<ul class="books">
+    <li *ngFor="let book of books"  [class.selected]="book === selectedBook" (click)="onSelect(book)">
+        <span class="badge">{{book.id}}</span> {{book.name}} <!--{{book.price}} {{book.author}} {{book.page}}-->
+    </li>
+</ul>
+
+<div *ngIf="selectedBook">
+
+    <h2>{{selectedBook.name | uppercase}} Details</h2>
+    <div><span>id: </span>{{selectedBook.id}}</div>
+    <div>
+        <label for="book-name">Book name: </label>
+        <input id="book-name" [(ngModel)]="selectedBook.name" placeholder="name">
+    </div>
+
+    <div>
+        <label for="book-price">Price: </label>
+        <input id="book-price" [(ngModel)]="selectedBook.price" placeholder="price">
+    </div>
+
+    <div>
+        <label for="book-author">Author: </label>
+        <input id="book-author" [(ngModel)]="selectedBook.author" placeholder="author">
+    </div>
+
+    <div>
+        <label for="book-page">Page: </label>
+        <input id="book-page" [(ngModel)]="selectedBook.page" placeholder="page">
+    </div>
+
+</div>
+
+
+
+<!--<h2>{{book.name | uppercase}} Details</h2>
+<div><span>id: </span>{{book.id}}</div>
+<div><span>name: </span>{{book.name}}</div>
+<div><span>price: </span>{{book.price}}</div>
+<div><span>author: </span>{{book.author}}</div>
+<div><span>page: </span>{{book.page}}</div>
+
+  <div>
+    <label for="name">Book name: </label>
+    <input id="name" [(ngModel)]="book.name" placeholder="name">
+    
+  </div>
+
+  <div>
+    <label for="Price">Price: </label>
+    <input id="price" [(ngModel)]="book.price" placeholder="price">
+    
+  </div>
+
+  <div>
+    <label for="Author">Author: </label>
+    <input id="author" [(ngModel)]="book.author" placeholder="author">
+    
+  </div>
+
+  <div>
+    <label for="Page">Page: </label>
+    <input id="page" [(ngModel)]="book.page" placeholder="page">
+    
+  </div>-->
