@@ -1,14 +1,39 @@
 <h2>My Books</h2>
 <ul class="books">
-    <li *ngFor="let book of books" 
-     [class.selected]="book === selectedBook" 
-     (click)="onSelect(book)">
+    <li *ngFor="let book of books" >
+    <a routerLink="/detail/{{book.id}}">
         <span class="badge">{{book.id}}</span> {{book.name}} <!--{{book.price}} {{book.author}} {{book.page}}-->
+        </a>
     </li>
 </ul>
-<app-book-detail [book]="selectedBook"></app-book-detail>
 
-<!--<div *ngIf="selectedBook">
+<div>
+  <label for="new-book">Book name: </label>
+  <input id="new-book" #bookName /><br>
+
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button class="add-button" (click)="add(bookName.value); bookName.value=''">
+    Add book
+  </button>
+</div>
+
+<!--<button class="delete" title="delete book"
+  (click)="delete(book)">x</button>
+
+  <ul class="books">
+    <li *ngFor="let book of books">
+      <a routerLink="/detail/{{book.id}}">
+        <span class="badge">{{book.id}}</span> {{book.name}}
+      </a>
+      <button class="delete" title="delete hero"
+        (click)="delete(hero)">x</button>
+    </li>
+  </ul>-->
+
+
+<!--<app-book-detail [book]="selectedBook"></app-book-detail>
+
+<div *ngIf="selectedBook">
 
     <h2>{{selectedBook.name | uppercase}} Details</h2>
     <div><span>id: </span>{{selectedBook.id}}</div>

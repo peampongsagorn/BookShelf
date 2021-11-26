@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Book } from '../book';
 //import { BOOKS } from '../mock-books';
 import { BookService } from '../book.service';
-import { MessageService } from '../message.service';
+
 
 
 @Component({
@@ -10,7 +10,32 @@ import { MessageService } from '../message.service';
   templateUrl: './books.component.html',
   styleUrls: ['./books.component.css']
 })
+
 export class BooksComponent implements OnInit {
+  books: Book[] = [];
+
+  constructor(private bookService: BookService) { }
+
+  ngOnInit(): void {
+    this.getBooks();
+  }
+
+  getBooks(): void {
+    this.bookService.getBooks()
+    .subscribe(books => this.books = books)
+  }
+  
+  add(name: string): void {
+    name = name.trim();
+    if (!name) { return; }
+    this.bookService.addBook({ name } as Book)
+      .subscribe(book => {
+        this.books.push(book);
+      });
+  }
+}
+
+/*export class BooksComponent implements OnInit {
   books: Book[] = [];
   selectedBook?: Book;
   //selectedBook: any;
@@ -32,4 +57,4 @@ export class BooksComponent implements OnInit {
         .subscribe(books => this.books = books);
   }
 
-}
+}*/
