@@ -13,8 +13,11 @@ import { BookService } from '../book.service';
 
 export class BooksComponent implements OnInit {
   books: Book[] = [];
+ 
 
   constructor(private bookService: BookService) { }
+
+  
 
   ngOnInit(): void {
     this.getBooks();
@@ -32,6 +35,11 @@ export class BooksComponent implements OnInit {
       .subscribe(book => {
         this.books.push(book);
       });
+  }
+
+  delete(book: Book): void {
+    this.books = this.books.filter(h => h !== book);
+    this.bookService.deleteBook(book.id).subscribe();
   }
 }
 

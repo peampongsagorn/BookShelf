@@ -4,6 +4,8 @@
     <a routerLink="/detail/{{book.id}}">
         <span class="badge">{{book.id}}</span> {{book.name}} <!--{{book.price}} {{book.author}} {{book.page}}-->
         </a>
+        <button class="delete" title="delete book"
+        (click)="delete(book)">x</button>
     </li>
 </ul>
 
@@ -17,6 +19,7 @@
   </button>
 </div>
 
+ 
 <!--<button class="delete" title="delete book"
   (click)="delete(book)">x</button>
 

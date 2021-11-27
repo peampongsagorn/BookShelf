@@ -58,18 +58,42 @@ export class BookService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
   /** PUT: update the hero on the server */
-updateHero(book: Book): Observable<any> {
+updateBook(book: Book): Observable<any> {
   return this.http.put(this.booksUrl, book, this.httpOptions).pipe(
     tap(_ => this.log(`updated hero id=${book.id}`)),
-    catchError(this.handleError<any>('updateHero'))
+    catchError(this.handleError<any>('updateBook'))
   );
 }
 
 /** POST: add a new hero to the server */
 addBook(book: Book): Observable<Book> {
   return this.http.post<Book>(this.booksUrl, book, this.httpOptions).pipe(
-    tap((newBook: Book) => this.log(`added hero w/ id=${newBook.id}`)),
+    tap((newBook: Book) => this.log(`added book w/ id=${newBook.id}`)),
     catchError(this.handleError<Book>('addBook'))
+  );
+}
+
+/** DELETE: delete the hero from the server */
+deleteBook(id: number): Observable<Book> {
+  const url = `${this.booksUrl}/${id}`;
+
+  return this.http.delete<Book>(url, this.httpOptions).pipe(
+    tap(_ => this.log(`deleted book id=${id}`)),
+    catchError(this.handleError<Book>('deleteBook'))
+  );
+}
+
+/* GET heroes whose name contains search term */
+searchBooks(term: string): Observable<Book[]> {
+  if (!term.trim()) {
+    // if not search term, return empty hero array.
+    return of([]);
+  }
+  return this.http.get<Book[]>(`${this.booksUrl}/?name=${term}`).pipe(
+    tap(x => x.length ?
+       this.log(`found books matching "${term}"`) :
+       this.log(`no books matching "${term}"`)),
+    catchError(this.handleError<Book[]>('searchBooks', []))
   );
 }
 }
