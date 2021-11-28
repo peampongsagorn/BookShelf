@@ -14,7 +14,8 @@ export class BookDetailComponent implements OnInit {
 
   @Input() book?: Book;
   
-  constructor(private route: ActivatedRoute,
+  constructor(
+    private route: ActivatedRoute,
     private heroService: BookService,
     private location: Location) { }
 

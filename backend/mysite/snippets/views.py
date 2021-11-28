@@ -24,5 +24,5 @@ class BookViewSet(viewsets.ModelViewSet):
                 raise Http404("Books does not exist")
         else:
             dataSet = self.queryset.all()
-        heroes = self.serializer_class(dataSet, many=True)
-        return Response(heroes.data)
+        books = self.serializer_class(dataSet, many=True)
+        return Response(books.data)
