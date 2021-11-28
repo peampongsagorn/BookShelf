@@ -1,50 +1,28 @@
-from django.http import HttpResponse, JsonResponse
-#from django.http.response import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from rest_framework.parsers import JSONParser
-from snippets.models import Book
+from django.db.models import Q
 from snippets.serializers import BookSerializer
-from django.shortcuts import render
+from snippets.models import Book
+from rest_framework import viewsets
+from django.http.response import Http404
+from rest_framework.decorators import action
+from rest_framework.response import Response
 
-@csrf_exempt
-def snippet_list(request):
+
+class BookViewSet(viewsets.ModelViewSet):
     """
-    List all code snippets, or create a new snippet.
+    This viewset automatically provides `list` and `retrieve` actions.
     """
-    if request.method == 'GET':
-        snippets = Book.objects.all()
-        serializer = BookSerializer(snippets, many=True)
-        return JsonResponse(serializer.data, safe=False)
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
 
-    elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = BookSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
-
-def snippet_detail(request, pk):
-    """
-    Retrieve, update or delete a code snippet.
-    """
-    try:
-        snippet = Book.objects.get(pk=pk)
-    except Book.DoesNotExist:
-        return HttpResponse(status=404)
-
-    if request.method == 'GET':
-        serializer = BookSerializer(snippet)
-        return JsonResponse(serializer.data)
-
-    elif request.method == 'PUT':
-        data = JSONParser().parse(request)
-        serializer = BookSerializer(snippet, data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=400)
-
-    elif request.method == 'DELETE':
-        snippet.delete()
-        return HttpResponse(status=204)
+    @action(detail=False, methods=['GET'])
+    def search(self, request, *args, **kwargs):
+        search_post = request.GET.get('_name')
+        if search_post or search_post == '':
+            try:
+                dataSet = self.queryset.filter(Q(name__icontains=search_post))
+            except Book.DoesNotExist:
+                raise Http404("Books does not exist")
+        else:
+            dataSet = self.queryset.all()
+        heroes = self.serializer_class(dataSet, many=True)
+        return Response(heroes.data)
