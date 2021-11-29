@@ -60,7 +60,7 @@ export class BookService {
   /** PUT: update the hero on the server */
 updateBook(book: Book): Observable<any> {
   const url = `${this.booksUrl}${book.id}/`;
-  return this.http.put(this.booksUrl, book, this.httpOptions).pipe(
+  return this.http.put(url, book, this.httpOptions).pipe(
     tap(_ => this.log(`updated book id=${book.id}`)),
     catchError(this.handleError<any>('updateBook'))
   );

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Book } from '../book';
 //import { BOOKS } from '../mock-books';
 import { BookService } from '../book.service';
-
+import { MessageService } from '../message.service';
 
 
 @Component({
@@ -17,9 +17,7 @@ export class BooksComponent implements OnInit {
 
   constructor(private bookService: BookService) { }
 
-  
-
-  ngOnInit(): void {
+  ngOnInit() {
     this.getBooks();
   }
 

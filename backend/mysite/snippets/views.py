@@ -7,6 +7,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 
 
+
 class BookViewSet(viewsets.ModelViewSet):
     """
     This viewset automatically provides `list` and `retrieve` actions.
