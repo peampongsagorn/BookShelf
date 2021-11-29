@@ -9,4 +9,4 @@ class SnippetSerializer(serializers.ModelSerializer):
 class BookSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book
-        fields = ['id', 'name', 'price', 'author', 'page']
+        fields = ['id', 'name', 'price', 'author', 'page', 'image']

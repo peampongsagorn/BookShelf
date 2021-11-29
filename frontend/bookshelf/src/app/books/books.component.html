@@ -1,6 +1,7 @@
 <h2>My Books</h2>
 <ul class="books">
     <li *ngFor="let book of books" >
+    <img src="{{book.image}}" style="height:100px;width:80px;">
     <a routerLink="/detail/{{book.id}}">
         <span class="badge">{{book.id}}</span> {{book.name}} <!--{{book.price}} {{book.author}} {{book.page}}-->
         </a>

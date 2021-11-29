@@ -17,7 +17,7 @@ class Book(models.Model):
     price = models.CharField(max_length=100, default='')
     author = models.CharField(max_length=100, default='')
     page = models.CharField(max_length=100, default='')
-
+    image = models.CharField(max_length=500, default='')
     #class Meta:
      #   ordering = ['created']
 
