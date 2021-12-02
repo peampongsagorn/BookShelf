@@ -1,7 +1,18 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <h1>{{title}}</h1>
-<nav>
-    <a routerLink="/dashboard">Dashboard</a>
-    <a routerLink="/books">Books</a>
-</nav>
+<div class="w3-top">
+    <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+      <a routerLink="/d" class="w3-bar-item w3-button">< BOOK SHELF</a>
+      <!-- Float links to the right. Hide them on small screens -->
+      <div class="w3-right w3-hide-small">
+        <a routerLink="/dashboard" class="w3-bar-item w3-button">Dashboard</a>
+        <a routerLink="/books" class="w3-bar-item w3-button">Books</a>
+        
+      </div>
+    </div>
+  </div>
+
 <router-outlet></router-outlet>
 <app-messages></app-messages>
