@@ -2,8 +2,11 @@
 <div class="books-menu">
   <a *ngFor="let book of books"
     routerLink="/detail/{{book.id}}">
-    {{book.name}}
+    {{book.name}}<br><br>
+    <img src="{{book.image}}" style="height:140px;width:100px;"><br>
+    <h5>{{book.price}} Bath</h5>
   </a>
 </div>
+
 
 <app-book-search></app-book-search>
