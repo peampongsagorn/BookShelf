@@ -13,6 +13,7 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 import { BookSearchComponent } from './book-search/book-search.component';
 import {ButtonModule} from 'primeng/button';
+import { HomeComponent } from './home/home.component';
 
 
 
@@ -25,6 +26,7 @@ import {ButtonModule} from 'primeng/button';
     MessagesComponent,
     DashboardComponent,
     BookSearchComponent,
+    HomeComponent,
     
   ],
   imports: [
